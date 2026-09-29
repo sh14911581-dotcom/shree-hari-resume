@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shree Hari P — Resume</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:        #0A0F1E;
+    --surface:   #121A2E;
+    --surface-2: #182240;
+    --line:      #263457;
+    --text:      #E7ECF7;
+    --muted:     #8B96B4;
+    --accent:    #7C9CFF;
+    --accent-2:  #F2B84B;
+    --node:      #3B4C82;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,h2,h3{
+    font-family: 'Space Grotesk', sans-serif;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .mono{ font-family: 'IBM Plex Mono', monospace; }
+
+  a{ color: var(--accent); text-decoration: none; }
+  a:hover{ text-decoration: underline; }
+
+  #network-bg{
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  .layout{
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    min-height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* ---------- SIDEBAR ---------- */
+  aside{
+    padding: 48px 32px;
+    border-right: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+    position: sticky;
+    top: 0;
+    align-self: start;
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  .cube-wrap{
+    display:flex;
+    justify-content:center;
+    padding: 12px 0 4px;
+    perspective: 900px;
+  }
+  .cube{
+    width: 128px;
+    height: 128px;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(-18deg);
+    animation: spin 16s linear infinite;
+  }
+  @keyframes spin{
+    from{ transform: rotateX(-18deg) rotateY(0deg); }
+    to{ transform: rotateX(-18deg) rotateY(360deg); }
+  }
+  .face{
+    position:absolute;
+    width:128px;
+    height:128px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:0.02em;
+    color: var(--text);
+    background: linear-gradient(155deg, rgba(124,156,255,0.16), rgba(24,34,64,0.9));
+    border: 1px solid rgba(124,156,255,0.4);
+    backdrop-filter: blur(2px);
+  }
+  .face.front  { transform: translateZ(64px); }
+  .face.back   { transform: rotateY(180deg) translateZ(64px); }
+  .face.right  { transform: rotateY(90deg) translateZ(64px); }
+  .face.left   { transform: rotateY(-90deg) translateZ(64px); }
+  .face.top    { transform: rotateX(90deg) translateZ(64px); background: linear-gradient(155deg, rgba(242,184,75,0.16), rgba(24,34,64,0.9)); border-color: rgba(242,184,75,0.4);}
+  .face.bottom { transform: rotateX(-90deg) translateZ(64px); background: linear-gradient(155deg, rgba(242,184,75,0.12), rgba(24,34,64,0.9)); border-color: rgba(242,184,75,0.3);}
+
+  .id-block{ text-align: center; }
+  .id-block .name{
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .id-block .role{
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .contact-list{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    font-size: 13.5px;
+  }
+  .contact-list div{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color: var(--muted);
+  }
+  .contact-list svg{ flex-shrink:0; width:16px; height:16px; stroke: var(--accent); }
+  .contact-list a{ color: var(--text); }
+  .contact-list a:hover{ color: var(--accent); }
+
+  nav{
+    display:flex;
+    flex-direction:column;
+    gap: 2px;
+    border-top: 1px solid var(--line);
+    padding-top: 22px;
+  }
+  nav a{
+    color: var(--muted);
+    font-size: 13.5px;
+    padding: 7px 0;
+    display:flex;
+    justify-content:space-between;
+    font-family:'IBM Plex Mono', monospace;
+  }
+  nav a:hover{ color: var(--accent); text-decoration:none; }
+  nav a span{ color: var(--line); }
+
+  .lang-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .lang-pill{
+    font-size:12px;
+    font-family:'IBM Plex Mono', monospace;
+    padding: 4px 10px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    color: var(--muted);
+  }
+
+  /* ---------- MAIN ---------- */
+  main{ padding: 56px 48px 100px; }
+
+  .objective{
+    font-size: 17px;
+    color: var(--text);
+    max-width: 62ch;
+    padding-left: 18px;
+    border-left: 2px solid var(--accent);
+  }
+
+  section{ margin-top: 64px; }
+  section:first-of-type{ margin-top: 0; }
+
+  .sec-title{
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    display:flex;
+    align-items:baseline;
+    gap: 12px;
+  }
+  .sec-title .idx{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--accent-2);
+  }
+
+  /* skills */
+  .skill-group{ margin-bottom: 18px; }
+  .skill-group:last-child{ margin-bottom: 0; }
+  .skill-group-label{
+    font-size: 12px;
+    color: var(--muted);
+    font-family:'IBM Plex Mono', monospace;
+    margin-bottom: 10px;
+  }
+  .chip-row{ display:flex; flex-wrap:wrap; gap:9px; }
+  .chip{
+    font-size: 13.5px;
+    padding: 6px 14px;
+    border-radius: 3px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--text);
+    transition: border-color .15s ease, transform .15s ease;
+  }
+  .chip:hover{ border-color: var(--accent); transform: translateY(-2px); }
+
+  /* timeline (experience) */
+  .timeline{ position:relative; padding-left: 26px; }
+  .timeline::before{
+    content:'';
+    position:absolute;
+    left: 5px; top: 6px; bottom: 6px;
+    width: 1px;
+    background: var(--line);
+  }
+  .tl-item{ position:relative; padding-bottom: 32px; }
+  .tl-item:last-child{ padding-bottom: 0; }
+  .tl-item::before{
+    content:'';
+    position:absolute;
+    left: -26px; top: 5px;
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--accent);
+  }
+  .tl-role{ font-size: 16.5px; font-weight: 600; }
+  .tl-org{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: var(--accent-2);
+    margin: 3px 0 10px;
+  }
+  .tl-item ul{ margin:0; padding-left: 18px; color: var(--muted); font-size: 14.5px; }
+  .tl-item li{ margin-bottom: 6px; }
+
+  /* projects */
+  .project-card{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 24px 26px;
+  }
+  .project-card h3{ font-size: 17px; margin-bottom: 12px; }
+  .project-card ul{ margin: 14px 0 0; padding-left: 18px; color: var(--muted); font-size: 14.5px; }
+  .project-card li{ margin-bottom: 6px; }
+
+  /* certifications */
+  .cert-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+  }
+  .cert-col-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  .cert-col ul{ margin:0; padding-left: 18px; font-size: 14.5px; }
+  .cert-col li{ margin-bottom: 9px; }
+
+  /* education */
+  table{ width:100%; border-collapse: collapse; font-size: 14.5px; }
+  th{
+    text-align:left;
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    color: var(--muted);
+    font-weight: 500;
+    padding: 0 0 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  td{
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tr:last-child td{ border-bottom: none; }
+  .score{
+    font-family:'IBM Plex Mono', monospace;
+    color: var(--accent-2);
+  }
+
+  footer{
+    margin-top: 70px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-size: 12.5px;
+    color: var(--muted);
+    font-family:'IBM Plex Mono', monospace;
+  }
+
+  @media (max-width: 860px){
+    .layout{ grid-template-columns: 1fr; }
+    aside{ position: relative; height: auto; border-right:none; border-bottom:1px solid var(--line); }
+    main{ padding: 40px 24px 80px; }
+    .cert-grid{ grid-template-columns: 1fr; gap: 28px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .cube{ animation: none; transform: rotateX(-18deg) rotateY(-28deg); }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="network-bg"></canvas>
+
+<div class="layout">
+  <aside>
+    <div class="cube-wrap">
+      <div class="cube">
+        <div class="face front">Java</div>
+        <div class="face back">C++</div>
+        <div class="face right">Python</div>
+        <div class="face left">Git</div>
+        <div class="face top">DSA</div>
+        <div class="face bottom">HTML/CSS</div>
+      </div>
+    </div>
+
+    <div class="id-block">
+      <div class="name">Shree Hari P</div>
+      <div class="role">Computer Science &amp; Engineering Student</div>
+    </div>
+
+    <div class="contact-list">
+      <div>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Tirupur, Tamil Nadu, India
+      </div>
+      <div>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.7A2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .3 2 .7 3a2 2 0 01-.5 2.1L8 10a16 16 0 006 6l1.2-1.3a2 2 0 012.1-.5c1 .4 2 .6 3 .7a2 2 0 011.7 2z"/></svg>
+        <a href="tel:+918098454366">+91 80984 54366</a>
+      </div>
+      <div>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg>
+        <a href="mailto:sh14911581@gmail.com">sh14911581@gmail.com</a>
+      </div>
+      <div>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        <a href="https://linkedin.com/in/shree-hari-b6122a349" target="_blank">linkedin.com/in/shree-hari</a>
+      </div>
+      <div>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9c0-1.1.3-1.8 1-2.5-3.3-.4-6.7-1.6-6.7-7.4 0-1.6.6-3 1.5-4-.1-.4-.7-2 .2-4.1 0 0 1.3-.4 4 1.6 2.2-.6 4.6-.6 6.9 0 2.6-2 3.9-1.6 3.9-1.6.8 2.1.3 3.7.1 4.1 1 1 1.5 2.4 1.5 4 0 5.9-3.4 7-6.7 7.4.5.5 1 1.5 1 2.9V19"/></svg>
+        <a href="https://github.com/sh14911581-dotcom/hari_star" target="_blank">github.com/hari_star</a>
+      </div>
+    </div>
+
+    <div>
+      <div class="skill-group-label">languages known</div>
+      <div class="lang-row">
+        <span class="lang-pill">English</span>
+        <span class="lang-pill">Tamil</span>
+        <span class="lang-pill">Basic Hindi</span>
+      </div>
+    </div>
+
+    <nav>
+      <a href="#objective">Objective <span>01</span></a>
+      <a href="#skills">Technical Skills <span>02</span></a>
+      <a href="#experience">Experience <span>03</span></a>
+      <a href="#projects">Projects <span>04</span></a>
+      <a href="#certs">Certifications <span>05</span></a>
+      <a href="#education">Education <span>06</span></a>
+    </nav>
+  </aside>
+
+  <main>
+    <section id="objective">
+      <div class="sec-title"><span class="idx">01</span>Career Objective</div>
+      <p class="objective">Motivated 3rd-year Computer Science &amp; Engineering student with a solid foundation in core programming languages, software development basics, and hands-on internship experience. Driven to solve technical problems, build reliable software applications, and contribute effectively to dynamic engineering teams.</p>
+    </section>
+
+    <section id="skills">
+      <div class="sec-title"><span class="idx">02</span>Technical Skills</div>
+
+      <div class="skill-group">
+        <div class="skill-group-label">programming languages</div>
+        <div class="chip-row">
+          <span class="chip">Java</span><span class="chip">C++</span><span class="chip">Python</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">web development</div>
+        <div class="chip-row">
+          <span class="chip">HTML5</span><span class="chip">CSS</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">core cs concepts</div>
+        <div class="chip-row">
+          <span class="chip">DSA Basics</span><span class="chip">OOP</span><span class="chip">Database Concepts</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">tools &amp; platforms</div>
+        <div class="chip-row">
+          <span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">VS Code</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="sec-title"><span class="idx">03</span>Internships &amp; Experience</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-role">TCS Youth Employment Program</div>
+          <div class="tl-org">Virtual Intern</div>
+          <ul>
+            <li>Gained exposure to modern IT industry practices, corporate software development workflows, and agile methodologies.</li>
+            <li>Participated in technical modules focused on structured problem-solving, algorithmic thinking, and professional technical communication.</li>
+          </ul>
+        </div>
+        <div class="tl-item">
+          <div class="tl-role">Thiranex</div>
+          <div class="tl-org">Technical Intern</div>
+          <ul>
+            <li>Collaborated on practical software development assignments and gained hands-on experience with modern technical toolchains.</li>
+            <li>Applied software engineering fundamentals and best practices to build functional application components.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="sec-title"><span class="idx">04</span>Key Projects</div>
+      <div class="project-card">
+        <h3>Employee Management System</h3>
+        <div class="chip-row">
+          <span class="chip">Java</span><span class="chip">HTML5</span><span class="chip">Database Concepts</span>
+        </div>
+        <ul>
+          <li>Designed and built a central software system to streamline employee data handling, profile records, and administrative tasks.</li>
+          <li>Implemented core CRUD (Create, Read, Update, Delete) functionality to manage organization records accurately.</li>
+          <li>Applied structured data flow and input validation logic to ensure smooth user navigation and data consistency.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="certs">
+      <div class="sec-title"><span class="idx">05</span>Certifications</div>
+      <div class="cert-grid">
+        <div class="cert-col">
+          <div class="cert-col-label">infosys springboard</div>
+          <ul>
+            <li>Programming using Java</li>
+            <li>Data Structures and Algorithms</li>
+            <li>Artificial Intelligence &amp; Generative AI for All</li>
+            <li>Prompt Engineering</li>
+            <li>App Operable Car [Centrado]</li>
+          </ul>
+        </div>
+        <div class="cert-col">
+          <div class="cert-col-label">other certifications</div>
+          <ul>
+            <li>Project on Redis – Handling Data</li>
+            <li>Robotics Course</li>
+            <li>FDP Digital Marketing Professional</li>
+            <li>Springpad Training Certification</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="sec-title"><span class="idx">06</span>Education</div>
+      <table>
+        <thead>
+          <tr><th>Degree / Certificate</th><th>Institution / Board</th><th>Batch</th><th>Score</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>B.E. Computer Science &amp; Engineering</td>
+            <td>V.S.B. College of Engineering Technical Campus</td>
+            <td class="mono">2024–2028</td>
+            <td class="score">8.5 CGPA</td>
+          </tr>
+          <tr>
+            <td>Higher Secondary (12th Standard)</td>
+            <td>Blue Bird Matriculation Higher Sec. School</td>
+            <td class="mono">2024</td>
+            <td class="score">79%</td>
+          </tr>
+          <tr>
+            <td>Secondary School (10th Standard)</td>
+            <td>Barath Matriculation School</td>
+            <td class="mono">2022</td>
+            <td class="score">84%</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer>shreehari.p — resume — generated 2026</footer>
+  </main>
+</div>
+
+<script>
+  // Graph-network background — a nod to Data Structures & Algorithms on the resume.
+  const canvas = document.getElementById('network-bg');
+  const ctx = canvas.getContext('2d');
+  let w, h, nodes;
+
+  function resize(){
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+    buildNodes();
+    draw();
+  }
+
+  function buildNodes(){
+    const count = Math.floor((w * h) / 45000);
+    nodes = Array.from({length: count}, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h
+    }));
+  }
+
+  function draw(){
+    ctx.clearRect(0, 0, w, h);
+    const maxDist = 170;
+
+    for (let i = 0; i < nodes.length; i++){
+      for (let j = i + 1; j < nodes.length; j++){
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < maxDist){
+          ctx.strokeStyle = `rgba(59,76,130,${1 - dist / maxDist})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+    nodes.forEach(n => {
+      ctx.fillStyle = 'rgba(124,156,255,0.5)';
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, 1.6, 0, Math.PI*2);
+      ctx.fill();
+    });
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+</script>
+
+</body>
+</html>
